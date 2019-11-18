@@ -16,6 +16,10 @@
                 <mat-error *ngIf="productForm.controls.product_name.errors?.required"> Product Name is required </mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <input matInput placeholder="Product Name Spanish" formControlName=product_name_sp>
+                <mat-error *ngIf="productForm.controls.product_name_sp.errors?.required"> Product Name Spanish is required </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <mat-select placeholder="Product Type" formControlName=product_type>
                     <mat-option [value]="">--</mat-option>
                     <mat-option *ngFor="let Product of Products" [value]="Product">
@@ -116,18 +120,36 @@
                 </mat-select>
                 <mat-error *ngIf="productForm.controls.tos.errors?.required"> TOS is required </mat-error>
             </mat-form-field>
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <mat-select placeholder="Select TOS Spanish" formControlName=tos_sp>
+                    <mat-option [value]="">--</mat-option>
+                    <mat-option *ngFor="let x of tosList" [value]="x.path">
+                        {{ x.file_name }} | version: {{ x.version }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="productForm.controls.tos.errors?.required"> TOS is required </mat-error>
+            </mat-form-field>
             <br>
             <mat-slide-toggle class="col-lg-3 col-md-3 col-sm-6 col-xs-12" formControlName=PassthruStatus>Passthru</mat-slide-toggle>
         </div>
         <div class="row">
             <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <textarea matInput placeholder="Electricity Price Text" formControlName=electricity_price_text></textarea>
+                <textarea matInput placeholder="Electricity Price Text " formControlName=electricity_price_text></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <textarea matInput placeholder="Electricity Price Text SP" formControlName=electricity_price_text_sp></textarea>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <textarea matInput placeholder="Other Key Term & Question Text" formControlName=other_key_term_and_ques_text></textarea>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <textarea matInput placeholder="Other Key Term & Question Text SP" formControlName=other_key_term_and_ques_text_sp></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <textarea matInput placeholder="Fees May Be Charged Text" formControlName=fees_may_be_charged_text></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <textarea matInput placeholder="Fees May Be Charged Text SP" formControlName=fees_may_be_charged_text_sp></textarea>
             </mat-form-field>
         </div>
         <br>

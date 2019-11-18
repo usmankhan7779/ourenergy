@@ -17,7 +17,11 @@ body {
 .mat-column-ed {
     flex: 0 0 130px;
 }
-
+.no-data{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
 .mat-column-tdsp {
     flex: 0 0 220px;
 }

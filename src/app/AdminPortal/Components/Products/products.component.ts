@@ -16,19 +16,48 @@ import Swal from 'sweetalert2'
 export class ViewProducts implements OnInit, AfterViewInit {
   constructor(private customer: CustomersService, private http: HttpClient, public dialog: MatDialog) { }
   @ViewChild(MatPaginator) paginator: MatPaginator
-  displayedColumns = ['e', 'prid', 'chid', 'n', 'is', 's', 'tdsp', 'promo', 'r', 'br', 't', 'pg', 'sd', 'ed', 'pt', 'st', 'v', 'i']
+  products = 'All Products';
+  view_products = [
+    { value: 'All Products', viewValue: 'All Products' },
+    { value: 'Active Products', viewValue: 'Active Products' },
+    { value: 'Inactive Products', viewValue: 'Inactive Products' }
+  ]
+  displayedColumns = ['e', 'prid', 'chid', 'n', 'is', 's', 'en_tdsp','spn_tdsp','promo', 'r', 'br', 't', 'pg', 'sd', 'ed', 'pt', 'st', 'v', 'i']
   dataSource = new MatTableDataSource()
   isMainDisabled = []
   isStatusDisabled = []
+  ActivedataSource = new MatTableDataSource()
+  InactivedataSource = new MatTableDataSource()
 
   ngOnInit() {
     this.getProducts()
   }
-
+  OnChange(event) {
+    if (event == 'Active Products') {
+      this.getActiveProd()
+    }
+    else if(event=='Inactive Products'){
+      this.getInctiveProd()
+    }
+  }
   getProducts() {
     this.customer.getAllProducts().subscribe(res => {
       if (res['status'] == true) {
         this.dataSource.data = res['message']
+      }
+    })
+  }
+  getActiveProd() {
+    this.customer.getActiveProducts().subscribe(res => {
+      if (res['status'] == true) {
+        this.ActivedataSource.data = res['message']
+      }
+    })
+  }
+  getInctiveProd() {
+    this.customer.getInactiveProducts().subscribe(res => {
+      if (res['status'] == true) {
+        this.InactivedataSource.data = res['message']
       }
     })
   }
@@ -110,6 +139,7 @@ export class ViewProducts implements OnInit, AfterViewInit {
     this.http.put(`${environment.url}portal/products-status-onclick/`, data).subscribe(res => {
       this.isStatusDisabled[value.id] = false
       this.getProducts()
+      this.getInctiveProd()
     })
   }
 
@@ -163,6 +193,7 @@ export class EditProductDialog implements OnInit {
     energy_charge: new FormControl(''),
     product_type: new FormControl(''),
     product_name: new FormControl(''),
+    product_name_sp : new FormControl(''),
     display_info: new FormControl(''),
     product_info: new FormControl(''),
     base_charge: new FormControl(''),
@@ -176,6 +207,7 @@ export class EditProductDialog implements OnInit {
     rate: new FormControl(''),
     term: new FormControl(''),
     tos: new FormControl('', [Validators.required]),
+    tos_sp: new FormControl('', [Validators.required]),
   })
 
   setForm() {
@@ -184,6 +216,7 @@ export class EditProductDialog implements OnInit {
     this.productForm.controls.product_id.setValue(this.productDetails.product_id)
     this.productForm.controls.product_type.setValue(this.productDetails.product_type)
     this.productForm.controls.product_name.setValue(this.productDetails.product_name)
+    this.productForm.controls.product_name_sp.setValue(this.productDetails.product_name_sp)
     this.productForm.controls.PassthruStatus.setValue(this.productDetails.PassthruStatus)
     this.productForm.controls.plan_group.setValue(this.productDetails.plan_group)
     this.productForm.controls.product_subtype.setValue(this.productDetails.product_subtype)
@@ -201,6 +234,7 @@ export class EditProductDialog implements OnInit {
     this.productForm.controls.base_charge.setValue(this.productDetails.base_charge)
     this.productForm.controls.energy_charge.setValue(this.productDetails.energy_charge)
     this.productForm.controls.tos.setValue(this.productDetails.tos)
+    this.productForm.controls.tos_sp.setValue(this.productDetails.tos_sp)
     this.productForm.controls.electricity_price_text.setValue(this.productDetails.electricity_price_text)
     this.productForm.controls.other_key_term_and_ques_text.setValue(this.productDetails.other_key_term_and_ques_text)
     this.productForm.controls.fees_may_be_charged_text.setValue(this.productDetails.fees_may_be_charged_text)
@@ -237,6 +271,7 @@ export class EditProductDialog implements OnInit {
       this.fd.append('product_id', this.productForm.controls.product_id.value)
       this.fd.append('product_type', this.productForm.controls.product_type.value)
       this.fd.append('product_name', this.productForm.controls.product_name.value)
+      this.fd.append('product_name_sp', this.productForm.controls.product_name_sp.value)
       this.fd.append('plan_group', this.productForm.controls.plan_group.value)
       this.fd.append('start_date', this.service.Date1(this.productForm.controls.start_date.value))
       this.fd.append('end_date', this.service.Date1(this.productForm.controls.end_date.value))
@@ -256,20 +291,36 @@ export class EditProductDialog implements OnInit {
       this.fd.append('base_charge', this.productForm.controls.base_charge.value)
       this.fd.append('energy_charge', this.productForm.controls.energy_charge.value)
       this.fd.append('tos', this.productForm.controls.tos.value)
+      this.fd.append('tos_sp', this.productForm.controls.tos_sp.value)
       if (this.productForm.controls.electricity_price_text.value != null && this.productForm.controls.electricity_price_text.value != undefined && this.productForm.controls.electricity_price_text.value != '') {
         this.fd.append('electricity_price_text', this.productForm.controls.electricity_price_text.value)
       } else {
         this.fd.append('electricity_price_text', 'Energy Charges is bundled and include all recurring delivery fees imposed by your local regulated TDU. This fixed price disclosure does not include applicable federal, state and local taxes or any fees (including gross receipt tax reimbursement), and all other non-recurring fees. Energy charge or Minimum Usage Fee is not prorated for short or nonstandard billing cycles.')
+      }
+      if (this.productForm.controls.electricity_price_text_sp.value != null && this.productForm.controls.electricity_price_text_sp.value != undefined && this.productForm.controls.electricity_price_text_sp.value != '') {
+        this.fd.append('electricity_price_text_sp', this.productForm.controls.electricity_price_text_sp.value)
+      } else {
+        this.fd.append('electricity_price_text', "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar.")
       }
       if (this.productForm.controls.other_key_term_and_ques_text.value != null && this.productForm.controls.other_key_term_and_ques_text.value != undefined && this.productForm.controls.other_key_term_and_ques_text.value != '') {
         this.fd.append('other_key_term_and_ques_text', this.productForm.controls.other_key_term_and_ques_text.value)
       } else {
         this.fd.append('other_key_term_and_ques_text', 'See Terms of Service for full listing of fees, deposit policy, and other terms.')
       }
+      if (this.productForm.controls.other_key_term_and_ques_text_sp.value != null && this.productForm.controls.other_key_term_and_ques_text_sp.value != undefined && this.productForm.controls.other_key_term_and_ques_text_sp.value != '') {
+        this.fd.append('other_key_term_and_ques_text_sp', this.productForm.controls.other_key_term_and_ques_text_sp.value)
+      } else {
+        this.fd.append('other_key_term_and_ques_text_sp', 'Consulte los Términos del servicio para ver una lista completa de tarifas, política de depósitos y otros términos.')
+      }
       if (this.productForm.controls.fees_may_be_charged_text.value != null && this.productForm.controls.fees_may_be_charged_text.value != undefined && this.productForm.controls.fees_may_be_charged_text.value != '') {
         this.fd.append('fees_may_be_charged_text', this.productForm.controls.fees_may_be_charged_text.value)
       } else {
-        this.fd.append('fees_may_be_charged_text', 'Fees not included in the price above: Insufficient funds:$30 Late Fee: 5% of past due balances. Disconnect/Reconnect for Non-Pay: $50. Information on other non-recurring fees is available on your “Terms of Service” document.')
+        this.fd.append('fees_may_be_charged_text', 'Fees not included in the price above: Insufficient funds:$25 Late Fee: 5% of past due balances. Disconnect/Reconnect for Non-Pay: $50. Information on other non-recurring fees is available on your “Terms of Service” document.')
+      }
+      if (this.productForm.controls.fees_may_be_charged_text_sp.value != null && this.productForm.controls.fees_may_be_charged_text_sp.value != undefined && this.productForm.controls.fees_may_be_charged_text_sp.value != '') {
+        this.fd.append('fees_may_be_charged_text_sp', this.productForm.controls.fees_may_be_charged_text_sp.value)
+      } else {
+        this.fd.append('fees_may_be_charged_text_sp', "Cargos no incluidos en el precio anterior: Fondos insuficientes: $25. Cargo por Demora: 5% de saldos vencidos. Desconexión/Reconexiónpor falta de pago: $50. La información sobre otros cargos no recurrentes está disponible en su documento de 'Términos del Servicio'.")
       }
       this.http.put(environment.url + "portal/set-products-rate-term/" + this.productDetails.id + "/", this.fd).subscribe(res => {
         if (res['status'] == true) {
@@ -447,6 +498,7 @@ export class AddAdditionalProduct implements OnInit {
     product_id: new FormControl('', [Validators.required]),
     product_type: new FormControl('', [Validators.required]),
     product_name: new FormControl('', [Validators.required]),
+    product_name_sp: new FormControl('', [Validators.required]),
     PassthruStatus: new FormControl({ value: false, disabled: true }),
     plan_group: new FormControl('', [Validators.required]),
     start_date: new FormControl('', [Validators.required]),
@@ -466,9 +518,15 @@ export class AddAdditionalProduct implements OnInit {
     batch_rate: new FormControl('', [Validators.required]),
     term: new FormControl('', [Validators.required]),
     tos: new FormControl('', [Validators.required]),
+    tos_sp: new FormControl('', [Validators.required]),
     electricity_price_text: new FormControl('Energy Charges is bundled and include all recurring delivery fees imposed by your local regulated TDU. This fixed price disclosure does not include applicable federal, state and local taxes or any fees (including gross receipt tax reimbursement), and all other non-recurring fees. Energy charge or Minimum Usage Fee is not prorated for short or nonstandard billing cycles.'),
+    electricity_price_text_sp: new FormControl("Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar."),
+
     other_key_term_and_ques_text: new FormControl('See Terms of Service for full listing of fees, deposit policy, and other terms.'),
-    fees_may_be_charged_text: new FormControl('Fees not included in the price above: Insufficient funds:$30 Late Fee: 5% of past due balances. Disconnect/Reconnect for Non-Pay: $50. Information on other non-recurring fees is available on your “Terms of Service” document.'),
+    other_key_term_and_ques_text_sp: new FormControl('Consulte los Términos del servicio para ver una lista completa de tarifas, política de depósitos y otros términos.'),
+
+    fees_may_be_charged_text: new FormControl('Fees not included in the price above: Insufficient funds:$25 Late Fee: 5% of past due balances. Disconnect/Reconnect for Non-Pay: $50. Information on other non-recurring fees is available on your “Terms of Service” document.'),
+    fees_may_be_charged_text_sp: new FormControl("Cargos no incluidos en el precio anterior: Fondos insuficientes: $25. Cargo por Demora: 5% de saldos vencidos. Desconexión/Reconexiónpor falta de pago: $50. La información sobre otros cargos no recurrentes está disponible en su documento de 'Términos del Servicio'."),
   })
 
   ngOnInit() {
@@ -505,6 +563,7 @@ export class AddAdditionalProduct implements OnInit {
       this.fd.append('product_id', this.productForm.controls.product_id.value)
       this.fd.append('product_type', this.productForm.controls.product_type.value)
       this.fd.append('product_name', this.productForm.controls.product_name.value)
+      this.fd.append('product_name_sp', this.productForm.controls.product_name_sp.value)
       this.fd.append('PassthruStatus', this.productForm.controls.PassthruStatus.value)
       this.fd.append('plan_group', this.productForm.controls.plan_group.value)
       this.fd.append('start_date', this.service.Date1(this.productForm.controls.start_date.value))
@@ -525,20 +584,36 @@ export class AddAdditionalProduct implements OnInit {
       this.fd.append('base_charge', this.productForm.controls.base_charge.value)
       this.fd.append('energy_charge', this.productForm.controls.energy_charge.value)
       this.fd.append('tos', this.productForm.controls.tos.value)
+      this.fd.append('tos_sp', this.productForm.controls.tos_sp.value)
       if (this.productForm.controls.electricity_price_text.value != null && this.productForm.controls.electricity_price_text.value != undefined && this.productForm.controls.electricity_price_text.value != '') {
         this.fd.append('electricity_price_text', this.productForm.controls.electricity_price_text.value)
       } else {
         this.fd.append('electricity_price_text', this.electricity_price_text_status)
+      }
+      if (this.productForm.controls.electricity_price_text_sp.value != null && this.productForm.controls.electricity_price_text_sp.value != undefined && this.productForm.controls.electricity_price_text_sp.value != '') {
+        this.fd.append('electricity_price_text_sp', this.productForm.controls.electricity_price_text_sp.value)
+      } else {
+        this.fd.append('electricity_price_text_sp', "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar.")
       }
       if (this.productForm.controls.other_key_term_and_ques_text.value != null && this.productForm.controls.other_key_term_and_ques_text.value != undefined && this.productForm.controls.other_key_term_and_ques_text.value != '') {
         this.fd.append('other_key_term_and_ques_text', this.productForm.controls.other_key_term_and_ques_text.value)
       } else {
         this.fd.append('other_key_term_and_ques_text', 'See Terms of Service for full listing of fees, deposit policy, and other terms.')
       }
+      if (this.productForm.controls.other_key_term_and_ques_text_sp.value != null && this.productForm.controls.other_key_term_and_ques_text_sp.value != undefined && this.productForm.controls.other_key_term_and_ques_text_sp.value != '') {
+        this.fd.append('other_key_term_and_ques_text_sp', this.productForm.controls.other_key_term_and_ques_text_sp.value)
+      } else {
+        this.fd.append('other_key_term_and_ques_text_sp', 'Consulte los Términos del servicio para ver una lista completa de tarifas, política de depósitos y otros términos.')
+      }
       if (this.productForm.controls.fees_may_be_charged_text.value != null && this.productForm.controls.fees_may_be_charged_text.value != undefined && this.productForm.controls.fees_may_be_charged_text.value != '') {
         this.fd.append('fees_may_be_charged_text', this.productForm.controls.fees_may_be_charged_text.value)
       } else {
-        this.fd.append('fees_may_be_charged_text', 'Fees not included in the price above: Insufficient funds:$30 Late Fee: 5% of past due balances. Disconnect/Reconnect for Non-Pay: $50. Information on other non-recurring fees is available on your “Terms of Service” document.')
+        this.fd.append('fees_may_be_charged_text', 'Fees not included in the price above: Insufficient funds:$25 Late Fee: 5% of past due balances. Disconnect/Reconnect for Non-Pay: $50. Information on other non-recurring fees is available on your “Terms of Service” document.')
+      }
+      if (this.productForm.controls.fees_may_be_charged_text_sp.value != null && this.productForm.controls.fees_may_be_charged_text_sp.value != undefined && this.productForm.controls.fees_may_be_charged_text_sp.value != '') {
+        this.fd.append('fees_may_be_charged_text_sp', this.productForm.controls.fees_may_be_charged_text_sp.value)
+      } else {
+        this.fd.append('fees_may_be_charged_text_sp', "Cargos no incluidos en el precio anterior: Fondos insuficientes: $25. Cargo por Demora: 5% de saldos vencidos. Desconexión/Reconexiónpor falta de pago: $50. La información sobre otros cargos no recurrentes está disponible en su documento de 'Términos del Servicio'.")
       }
       this.http.post(`${environment.url}portal/get-products/`, this.fd).subscribe(res => {
         if (res['status'] == true) {
@@ -575,6 +650,7 @@ export class AddAdditionalProduct implements OnInit {
 export class AddRemoveTdspDialog implements OnInit {
   constructor(public thisDialogRef: MatDialogRef<ViewProducts>, private http: HttpClient, @Inject(MAT_DIALOG_DATA) public data: any) { }
   tdsp = []
+  tdsp_sp = []
   isDisabled = []
   ngOnInit() { }
 
@@ -603,6 +679,7 @@ export class AddRemovePromoCodeDialog implements OnInit {
   constructor(public thisDialogRef: MatDialogRef<ViewProducts>, private http: HttpClient, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   tdsp = []
+  tdsp_sp = []
   isDisabled = []
   ngOnInit() {
   }
