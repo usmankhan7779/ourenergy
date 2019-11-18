@@ -1,0 +1,33 @@
+.Confirmation {
+    padding: 30px;
+    box-shadow: 0 0 15px #ccc;
+    border-radius: 8px;
+    hr {
+        margin: 10px !important;
+    }
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+h4 {
+    margin-top: 5px;
+}
+
+.text1 {
+    display: inline;
+}
+
+.main {
+    display: flex;
+}
+
+.inner {
+    flex: 1;
+}
+.pt-50{
+  padding-top: 50px;
+}

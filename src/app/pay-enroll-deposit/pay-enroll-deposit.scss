@@ -1,0 +1,29 @@
+::ng-deep .contains {
+    .mat-form-field-underline {
+        height: 0px !important;
+    }
+    .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after,
+    .mat-input-element:disabled {
+        color: #333
+    }
+}
+
+.mat-form-field {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+h1 {
+    font-weight: 700
+}
+
+h3 {
+    font-weight: bold;
+}
+
+h4 {
+    text-align: center;
+    font-weight: bold;
+}

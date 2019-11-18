@@ -1,0 +1,13 @@
+<div class="card recaptcha_div">
+    <div class="main">
+        <img [src]="imgName">
+        <mat-form-field class="text-center" floatLabel="always">
+            <mat-label></mat-label>
+            <input matInput [(ngModel)]="capchaText" autocomplete="off" maxlength="5" (ngModelChange)="checkChange()" placeholder="Enter text">
+        </mat-form-field>
+    </div>
+    <button type="button" (click)="resetImg()" mat-icon-button>
+        <mat-icon>cached</mat-icon>
+      </button>
+   
+</div>

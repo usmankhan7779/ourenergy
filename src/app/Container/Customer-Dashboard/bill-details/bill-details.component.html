@@ -1,0 +1,31 @@
+<div class="col mat-elevation-z5"  *ngFor="let info of custInfo">
+    <h2 class="dashboard_username" (click)="toggle_name()">    {{info.cust_firstname | titlecase}} {{info.cust_lastname | titlecase}} 
+      <i class="fa fa-angle-down toggle_icon pull-right" ></i>
+    </h2>
+    <div class="infoBox s_fix_cont">
+        <table class="table">
+            <thead>
+              <tr>
+                <th >Name</th>
+                <th >Premise ID</th>
+                <th >Account</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td *ngIf="info.company_name == ''"> 
+                    {{info.cust_firstname | titlecase}} {{info.cust_lastname | titlecase}}
+               
+              </td>
+                <td *ngIf="info.cust_firstname == ''">
+                    {{info.company_name}}
+                </td>
+                <td> {{info.premise_id}}</td>
+                <td> {{info.cust_id}}</td>
+               
+              </tr>
+            </tbody>
+          </table>
+      <!--  -->
+    </div>
+</div>

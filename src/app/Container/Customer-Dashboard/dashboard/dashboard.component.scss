@@ -1,0 +1,85 @@
+.App {
+    width: inherit;
+    height: inherit;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+.App .children {
+    position: relative;
+    width: calc(100% - 250px);
+    float: right;
+    padding-right: 10px;
+}
+
+.App .footer {
+    position: fixed;
+    width: calc(100% - 220px);
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+}
+
+.App .staticContent {
+    width: calc(100% - 230px);
+    float: right;
+    margin-top: 60px;
+}
+
+@media only screen and (max-width: 1188px) {
+    .App .children {
+        width: calc(100% - 20px);
+    }
+    .App .footer {
+        position: fixed;
+        width: calc(100% - 0px);
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .App .staticContent {
+        width: calc(100% - 0px);
+        position: relative;
+    }
+}
+
+@media only screen and (max-width: 1640px) {
+    .App .children {
+        width: calc(100% - 250px);
+    }
+}
+
+@media only screen and (max-width: 1137px) {
+    .App .children {
+        width: calc(100% - 250px);
+    }
+}
+
+@media only screen and (max-width: 986px) and (min-width: 1188px) {
+    .App .children {
+        position: relative;
+        width: calc(100% - 250px);
+    }
+}
+
+@media only screen and (max-width: 1188px) {
+    .App .children {
+        width: calc(100% - 20px);
+        margin-bottom: 105px;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .App .children {
+        position: relative;
+        width: calc(100% - 20px);
+        margin-bottom: 105px;
+    }
+}
+@media only screen and (max-width:540px){
+  .footer{
+    display: none;
+  }
+}

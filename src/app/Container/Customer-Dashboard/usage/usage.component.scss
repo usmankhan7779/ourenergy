@@ -1,0 +1,52 @@
+.charts {
+    box-shadow: 0 3px 5px 0 rgba(10, 10, 10, 0.5), 0 6px 20px 0 rgba(24, 23, 23, 0.19);
+}
+
+@media only screen and (max-width: 770px) {
+    .charts>div {
+        margin: 40px 0;
+    }
+}
+
+.spinner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.Option-button {
+    position: absolute;
+    top: 46%;
+    left: 15px;
+    button {
+        font-size: 30px;
+        line-height: 0;
+    }
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.mat-menu-item {
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+h2 {
+    font-weight: bold;
+    margin-top: 70px;
+}
+.container{
+  margin-bottom: 100px;
+}
+.save_menu{
+  padding:5px;
+}
+@media (min-width: 1200px){
+  .container {
+      width: 970px;
+  }
+}

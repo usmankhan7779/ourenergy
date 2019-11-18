@@ -1,0 +1,37 @@
+<mat-card class="productsnoffer">
+    <div class="spinner" *ngIf="showSpinner">
+        <img src="../../../assets/img/Spinner-new.svg" width="150" height="150" alt="logo">
+    </div>
+
+    <h2 class="spinner" *ngIf="!request">{{error}}</h2>
+    <div class="ErrormEssage">
+        <span>{{ErrorResponse}}</span>
+    </div>
+    <div class="side-container" *ngIf="response">
+        <div class="main-container">
+          <h3 class="dashboard_h3">Plan Information</h3>
+            <div class="sub-container" *ngFor="let i of response">
+                <div class="inner-container">
+                    <div>Product Name:</div>
+                    <div class="child"> {{i.product_info}}</div>
+                </div>
+                <div class="inner-container">
+                    <div>Contract Term:</div>
+                    <div class="child"> {{i.term}}</div>
+                </div>
+                <div class="inner-container">
+                    <div>Rate Type:</div>
+                    <div class="child"> {{i.contract_type_desc}}</div>
+                </div>
+                <div class="inner-container">
+                    <div>Contract Start Date:</div>
+                    <div class="child"> {{i.start_date}}</div>
+                </div>
+                <div class="inner-container">
+                    <div>Contract Exp. Date:</div>
+                    <div class="child"> {{i.end_date}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card>

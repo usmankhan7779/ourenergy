@@ -1,0 +1,100 @@
+
+<div class="header " >
+    <!-- <div class="tempHeader">
+      <marquee *ngFor="let value of data;index as i;">
+        <a href="{{value.redirect_link}}" target="_blank">
+          <h3>{{value.text_to_display}}</h3>
+          </a>
+      </marquee>
+    </div> -->
+  <div class="inner_header" id="MYHeader">
+    <div class="logo_wrapp">
+      <div>
+          <a class="logo" [routerLink]="['/']">
+            <img src="../assets/img/site_logo.png" alt="logo" routerLink="">
+          </a>
+      </div>
+    </div>
+    <div class="nav_right">
+      <mat-list role="list" class="nav">
+        <a routerLink="/about" routerLinkActive="Active">
+          <mat-list-item class="main-listt" role="listitem">
+            About Us
+          </mat-list-item>
+        </a>
+        <a routerLink="/residential" routerLinkActive="Active">
+          <mat-list-item class="main-listt" role="listitem">
+            For the Home
+
+          </mat-list-item>
+        </a>
+        <a routerLink="/commercial" routerLinkActive="Active">
+          <mat-list-item class="main-listt" role="listitem">
+            For the Business
+          </mat-list-item>
+        </a>
+
+        <button class="sMyAccount divide_login" *ngIf="!show"  type="button" routerLink="/login">
+          <mat-list-item   class="main-listt  btn" role="listitem">
+            My Account
+           </mat-list-item> 
+        </button>
+        
+        <button class="sMyAccount divide_login" *ngIf="show"  type="button" routerLink="/dashboard">
+          <mat-list-item   class="main-listt  btn" role="listitem">
+            My Account
+           </mat-list-item> 
+        </button>
+
+      <!-- <mat-list-item *ngIf="!show" class="main-listt  one" role="listitem">
+        {{username}}
+      </mat-list-item> -->
+      <!-- <a *ngIf="show" routerLink="/dashboard" routerLinkActive="Active">
+        <mat-list-item  class="main-listt  " role="listitem" >
+          <img  class="icons s_prof_img" src="../assets/img/Icons/Profile.png"> {{username}}
+        </mat-list-item>
+      </a> -->
+    
+      </mat-list>
+    </div>
+    <div class="Toggle" (click)="show_sidebar()">
+      <mat-icon >format_align_right</mat-icon>
+    </div>
+  </div>
+</div>
+
+ <div class="topnav" id="myTopnav">
+  <mat-list>
+    <a routerLink="/about" routerLinkActive="Active" (click)="close_sidebar()">
+      <mat-list-item class="main-listt" role="listitem">
+        About Us
+      </mat-list-item>
+    </a>
+    <a routerLink="/residential" routerLinkActive="Active" (click)="close_sidebar()">
+      <mat-list-item class="main-listt" role="listitem">
+        For the Home
+      </mat-list-item>
+    </a>
+    <a routerLink="/commercial" routerLinkActive="Active" (click)="close_sidebar()">
+      <mat-list-item class="main-listt" role="listitem">
+        For the Business
+      </mat-list-item>
+    </a>
+    <button class="sMyAccount" *ngIf="!show" type="button" routerLink="/login"  (click)="close_sidebar()">
+      <mat-list-item class="main-listt  btn" role="listitem">
+        My Account
+      </mat-list-item>
+    </button>
+    <button class="sMyAccount" *ngIf="show" type="button" routerLink="/dashboard"  (click)="close_sidebar()">
+      <mat-list-item class="main-listt  btn" role="listitem">
+        My Account
+      </mat-list-item>
+    </button>
+    <!-- <a *ngIf="show" (click)="close_sidebar()" routerLink="/dashboard" routerLinkActive="Active">
+      <mat-list-item  class="main-listt " role="listitem" >
+        <img class="icons s_prof_img" src="../assets/img/Icons/Profile.png"> {{username}}
+      </mat-list-item>
+    </a> -->
+
+  </mat-list>
+</div> 
