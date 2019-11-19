@@ -130,6 +130,7 @@ export class ViewProducts implements OnInit, AfterViewInit {
     this.http.post(`${environment.url}portal/products-status-onclick/`, data).subscribe(res => {
       this.isMainDisabled[value.id] = false
       this.getProducts()
+      this.getInctiveProd()
     })
   }
 
@@ -182,10 +183,13 @@ export class EditProductDialog implements OnInit {
   productForm = new FormGroup({
 
     other_key_term_and_ques_text: new FormControl(''),
+    other_key_term_and_ques_text_sp: new FormControl(''),
     average_renewals_content: new FormControl(''),
     fees_may_be_charged_text: new FormControl(''),
+    fees_may_be_charged_text_sp: new FormControl(''),
     display_termination_fee: new FormControl(''),
     electricity_price_text: new FormControl(''),
+    electricity_price_text_sp: new FormControl(''),
     product_visibility: new FormControl(''),
     renewals_content: new FormControl(''),
     product_subtype: new FormControl(''),
@@ -216,7 +220,7 @@ export class EditProductDialog implements OnInit {
     this.productForm.controls.product_id.setValue(this.productDetails.product_id)
     this.productForm.controls.product_type.setValue(this.productDetails.product_type)
     this.productForm.controls.product_name.setValue(this.productDetails.product_name)
-    this.productForm.controls.product_name_sp.setValue(this.productDetails.product_name_sp)
+    // this.productForm.controls.product_name_sp.setValue(this.productDetails.product_name_sp)
     this.productForm.controls.PassthruStatus.setValue(this.productDetails.PassthruStatus)
     this.productForm.controls.plan_group.setValue(this.productDetails.plan_group)
     this.productForm.controls.product_subtype.setValue(this.productDetails.product_subtype)
@@ -236,8 +240,12 @@ export class EditProductDialog implements OnInit {
     this.productForm.controls.tos.setValue(this.productDetails.tos)
     this.productForm.controls.tos_sp.setValue(this.productDetails.tos_sp)
     this.productForm.controls.electricity_price_text.setValue(this.productDetails.electricity_price_text)
+    this.productForm.controls.electricity_price_text_sp.setValue(this.productDetails.electricity_price_text_sp)
     this.productForm.controls.other_key_term_and_ques_text.setValue(this.productDetails.other_key_term_and_ques_text)
+    this.productForm.controls.other_key_term_and_ques_text_sp.setValue(this.productDetails.other_key_term_and_ques_text_sp)
     this.productForm.controls.fees_may_be_charged_text.setValue(this.productDetails.fees_may_be_charged_text)
+    this.productForm.controls.fees_may_be_charged_text_sp.setValue(this.productDetails.fees_may_be_charged_text_sp)
+
   }
 
   ngOnInit() {
@@ -266,12 +274,14 @@ export class EditProductDialog implements OnInit {
   fd = new FormData()
 
   submit() {
+    alert('edit')
     this.isBtnDisabled = true
     if (this.productForm.valid == true) {
+      alert('valid')
       this.fd.append('product_id', this.productForm.controls.product_id.value)
       this.fd.append('product_type', this.productForm.controls.product_type.value)
       this.fd.append('product_name', this.productForm.controls.product_name.value)
-      this.fd.append('product_name_sp', this.productForm.controls.product_name_sp.value)
+      // this.fd.append('product_name_sp', this.productForm.controls.product_name_sp.value)
       this.fd.append('plan_group', this.productForm.controls.plan_group.value)
       this.fd.append('start_date', this.service.Date1(this.productForm.controls.start_date.value))
       this.fd.append('end_date', this.service.Date1(this.productForm.controls.end_date.value))
@@ -300,7 +310,7 @@ export class EditProductDialog implements OnInit {
       if (this.productForm.controls.electricity_price_text_sp.value != null && this.productForm.controls.electricity_price_text_sp.value != undefined && this.productForm.controls.electricity_price_text_sp.value != '') {
         this.fd.append('electricity_price_text_sp', this.productForm.controls.electricity_price_text_sp.value)
       } else {
-        this.fd.append('electricity_price_text', "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar.")
+        this.fd.append('electricity_price_text_sp', "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar.")
       }
       if (this.productForm.controls.other_key_term_and_ques_text.value != null && this.productForm.controls.other_key_term_and_ques_text.value != undefined && this.productForm.controls.other_key_term_and_ques_text.value != '') {
         this.fd.append('other_key_term_and_ques_text', this.productForm.controls.other_key_term_and_ques_text.value)

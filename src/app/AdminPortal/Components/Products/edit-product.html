@@ -98,6 +98,15 @@
                 <mat-error *ngIf="productForm.controls.tos.errors?.required"> TOS is required </mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <mat-select placeholder="Select TOS Spanish" formControlName=tos_sp>
+                    <mat-option [value]="">--</mat-option>
+                    <mat-option *ngFor="let x of tosList" [value]="x.path">
+                        {{ x.file_name }} | version: {{ x.version }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="productForm.controls.tos.errors?.required"> TOS Spanish is required </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <mat-select placeholder="Product Visibilty" formControlName=product_visibility>
                     <!-- <mat-option [value]="">--</mat-option> -->
                     <mat-option *ngFor="let productsvisibilitys of productsvisibility" [value]="productsvisibilitys.viewValue">
@@ -112,10 +121,19 @@
                 <textarea matInput placeholder="Electricity Price Text" formControlName=electricity_price_text></textarea>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <textarea matInput placeholder="Electricity Price Text Spanish" formControlName=electricity_price_text_sp></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <textarea matInput placeholder="Other Key Term & Question Text" formControlName=other_key_term_and_ques_text></textarea>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <textarea matInput placeholder="Other Key Term & Question Text Spanish" formControlName=other_key_term_and_ques_text_sp></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <textarea matInput placeholder="Fees May Be Charged Text" formControlName=fees_may_be_charged_text></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <textarea matInput placeholder="Fees May Be Charged Text Spanish" formControlName=fees_may_be_charged_text_sp></textarea>
             </mat-form-field>
         </div>
     </form>
