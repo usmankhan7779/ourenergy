@@ -8,6 +8,7 @@
 border-bottom: 1px solid #ccc;
 min-height: 126px;
 }
+
 .rateSheet span{
 font-size: 14px;
 font-weight: 400;
@@ -15,11 +16,18 @@ line-height: 2em;
 color: #959fac;
 display: block;
 }
+.links-list b{
+  // margin: 0 10px;
+  color: #959fac;
+  font-weight: 400;
+}
 .links-list a{
-  margin: 0 10px;
-  font-size: 18px;
+  margin: 0 5px;
+  font-size: 14px;
   color: #959fac;
   text-decoration: underline;
+  font-weight: 700;
+  line-height: 28px;
 }
 .search-result{
   display: flex;

@@ -63,14 +63,20 @@
                                     </div>
 
                                     <div class="text-center inner links-list">
-                                        <!-- [href]="value.product_efl_url" -->
-                                        <a matTooltip="Terms of Service" href="{{value.product_tos_url}}"
-                                            target="_blank"><b>TOS</b></a>
-                                        <a matTooltip="Your Rights as a Customer"
-                                            href="https://www.ourenergyllc.com/prodox/yrac.pdf"
-                                            target="_blank"><b>YRAC</b></a>
-                                        <a matTooltip="Electric Facts Label" href="{{value.product_efl_url}}"
-                                            target="_blank"><b>EFL</b></a>
+                                        <b>Terms of Service (TOS) </b>
+                                        <a matTooltip="Terms of Service" [href]=value.product_tos_url target="_blank">
+                                            English </a> |
+                                        <a matTooltip="Terms of Service Spanish" [href]=value.tos_sp target="_blank">
+                                            Español </a>
+                                        <b>Electric Facts Label (EFL)</b>
+                                        <a matTooltip="Electric Facts Label" [href]=value.product_efl_url
+                                            target="_blank">
+                                            English</a> |
+                                        <a matTooltip="Electric Facts Label Spanish" [href]=value.product_efl_url_sp
+                                            target="_blank">Español</a>
+                                        <a class="ml-0" href="http://www.ourenergyllc.com/prodox/yrac.pdf"
+                                            target="_blank">Your Rights As A Customer (YRAC)
+                                        </a>
 
                                         <button class="pink_btn enroll-btn" data-toggle="modal" data-target="#myModal"
                                             (click)="getvalue(value.product_name,value.tariff_500,value.tariff_1000,value.tariff_2000,
@@ -278,28 +284,33 @@
                 <!--  -->
             </div>
             <div class="check renew_check">
-                <mat-checkbox  name="check1" [(ngModel)]=check1 value="check1"   
-                (change)="checked1($event)"><b> I am choosing Our Energy LLC | TX PUCT # 10170 to
+                <mat-checkbox name="check1" [(ngModel)]=check1 value="check1" (change)="checked1($event)"><b> I am
+                        choosing Our Energy LLC | TX PUCT # 10170 to
                         provide energy services for the selected location.</b></mat-checkbox>
 
                 <mat-checkbox [(ngModel)]=check2 (change)="checked2($event)"><b>
                         I am an authorized person to request service for the selected location.</b></mat-checkbox>
 
-                <mat-checkbox [(ngModel)]=check3 (change)="checked3($event)"><b> Any Enrollment request including move-in or a switch can
+                <mat-checkbox [(ngModel)]=check3 (change)="checked3($event)"><b> Any Enrollment request including
+                        move-in or a switch can
                         only be made by the service applicant or the applicant's authorized agent. If you are not an
                         authorized individual, please do not submit your request using this portal.
                     </b></mat-checkbox>
 
-                    <mat-checkbox [(ngModel)]=check4 (change)="checked4($event)"><b> 
-                            I have reviewed the information provided and by clicking “Renew Now” below, I accept that I am authorizing Our Energy LLC to become my new retail electric provider and to act as my agent to perform the necessary task to establish my electric service amount with Our Energy LLC. This authorization to establish or switch my provider of electric service extends to the above location.
-                        </b></mat-checkbox>
+                <mat-checkbox [(ngModel)]=check4 (change)="checked4($event)"><b>
+                        I have reviewed the information provided and by clicking “Renew Now” below, I accept that I am
+                        authorizing Our Energy LLC to become my new retail electric provider and to act as my agent to
+                        perform the necessary task to establish my electric service amount with Our Energy LLC. This
+                        authorization to establish or switch my provider of electric service extends to the above
+                        location.
+                    </b></mat-checkbox>
 
 
 
 
 
 
-<!--  
+                <!--  
                 <label class="checkbox-font">
         <input type="checkbox" name="check1" [(ngModel)]=check1 value="check1" (change)="checked1($event,i)">36
         Months

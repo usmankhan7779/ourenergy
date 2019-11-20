@@ -56,10 +56,10 @@
                     <mat-radio-button color="primary" (click)="averge_500()" value="500">
                         <p class="radioText">500 kWh</p>
                     </mat-radio-button>
-                    <mat-radio-button color="primary"  (click)="averge_1000()" value="1000">
+                    <mat-radio-button color="primary" (click)="averge_1000()" value="1000">
                         <p class="radioText">1000 kWh</p>
                     </mat-radio-button>
-                    <mat-radio-button color="primary"  (click)="averge_2000()" value="2000" checked="true">
+                    <mat-radio-button color="primary" (click)="averge_2000()" value="2000" checked="true">
                         <p class="radioText">2000 kWh</p>
                     </mat-radio-button>
                 </mat-radio-group>
@@ -69,13 +69,13 @@
                     Contract Terms
                 </label>
                 <section class="">
-                    <mat-slide-toggle color="primary"  (change)="filterProduct()"[(ngModel)]="term1" class="">
+                    <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term1" class="">
                         <p>36 Months</p>
                     </mat-slide-toggle>
                     <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term2" class="">
                         <p>24 Months</p>
                     </mat-slide-toggle>
-                    <mat-slide-toggle color="primary"  (change)="filterProduct()"[(ngModel)]="term3" class="">
+                    <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term3" class="">
                         <p>18 Months</p>
                     </mat-slide-toggle>
                     <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term4" class="">
@@ -84,7 +84,7 @@
                     <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term5" class="">
                         <p>12 Months</p>
                     </mat-slide-toggle>
-                    <mat-slide-toggle color="primary" (change)="filterProduct()"  [(ngModel)]="term6" class="">
+                    <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term6" class="">
                         <p>6 Months</p>
                     </mat-slide-toggle>
                     <mat-slide-toggle color="primary" (change)="filterProduct()" [(ngModel)]="term7" class="">
@@ -323,27 +323,36 @@
                                 </div>
 
                                 <div class="text-center inner links-list">
-                                    <a matTooltip="Terms of Service" [href]=value.product_tos_url
-                                        target="_blank"><b>TOS</b></a>
+                                    <b>Terms of Service (TOS) </b>
+                                    <a matTooltip="Terms of Service" [href]=value.product_tos_url target="_blank">
+                                        English </a> |
+                                    <a matTooltip="Terms of Service Spanish" [href]=value.tos_sp target="_blank">
+                                        Español </a><br>
+                                    <b>Electric Facts Label (EFL)</b>
+                                    <a matTooltip="Electric Facts Label" [href]=value.product_efl_url target="_blank">
+                                        English</a> |
+                                    <a matTooltip="Electric Facts Label Spanish" [href]=value.product_efl_url_sp
+                                        target="_blank">Español</a>
+                                    <br>
                                     <a matTooltip="Your Rights as a Customer"
-                                        href="https://www.ourenergyllc.com/prodox/yrac.pdf"
-                                        target="_blank"><b>YRAC</b></a>
-                                    <a matTooltip="Electric Facts Label" [href]=value.product_efl_url
-                                        target="_blank"><b>EFL</b></a>
-                                        <!-- enroll(i) -->
+                                        href="https://www.ourenergyllc.com/prodox/yrac.pdf" target="_blank">Your
+                                            Rights As A Customer (YRAC)</a>
+                                    <!-- enroll(i) -->
                                     <button class="pink_btn enroll-btn" [disabled]="selectProductBtnDisabled[i]"
-                                        (click)="enroll(i);viewprice(value.tariff_500,value.tariff_1000,value.tariff_2000)">Enroll Now</button>
+                                        (click)="enroll(i);viewprice(value.tariff_500,value.tariff_1000,value.tariff_2000)">Enroll
+                                        Now</button>
+                                    <p class="box-id">{{value.product_id}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                  </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+</div>
+<br>
+<br>
 <div *ngIf="showTdsp" class="residential-main">
     <div class="container">
         <div class="heading">

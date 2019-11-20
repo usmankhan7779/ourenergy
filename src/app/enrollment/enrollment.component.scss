@@ -463,3 +463,21 @@ th {
     left: 15px;
     bottom: 3px;
 }
+
+.TOS_EFL{
+    line-height: 26px;
+    b{
+        color: #959fac;
+        font-weight: 400;
+      }
+      a {
+        margin: 0 5px;
+        font-size: 14px;
+        color: #959fac;
+        text-decoration: underline;
+        font-weight: 700;
+      }
+      .ml-0{
+          margin-left: 0;
+      }
+}

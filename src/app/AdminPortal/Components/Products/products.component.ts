@@ -310,7 +310,7 @@ export class EditProductDialog implements OnInit {
       if (this.productForm.controls.electricity_price_text_sp.value != null && this.productForm.controls.electricity_price_text_sp.value != undefined && this.productForm.controls.electricity_price_text_sp.value != '') {
         this.fd.append('electricity_price_text_sp', this.productForm.controls.electricity_price_text_sp.value)
       } else {
-        this.fd.append('electricity_price_text_sp', "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar.")
+        this.fd.append('electricity_price_text_sp', "Los cargos de energía se incluyen e incluyen todas las tarifas de entrega recurrentes impuestas por su TDU regulada local. Esta divulgación de precio fijo no incluye los impuestos federales, estatales y locales aplicables ni ninguna tarifa (incluido el reembolso del impuesto de recibo bruto) y todas las demás tarifas no recurrentes. El cargo de energía, la tarifa base o la tarifa de uso mínimo no se prorratean para ciclos de facturación cortos o no estándar.")
       }
       if (this.productForm.controls.other_key_term_and_ques_text.value != null && this.productForm.controls.other_key_term_and_ques_text.value != undefined && this.productForm.controls.other_key_term_and_ques_text.value != '') {
         this.fd.append('other_key_term_and_ques_text', this.productForm.controls.other_key_term_and_ques_text.value)
@@ -530,7 +530,7 @@ export class AddAdditionalProduct implements OnInit {
     tos: new FormControl('', [Validators.required]),
     tos_sp: new FormControl('', [Validators.required]),
     electricity_price_text: new FormControl('Energy Charges is bundled and include all recurring delivery fees imposed by your local regulated TDU. This fixed price disclosure does not include applicable federal, state and local taxes or any fees (including gross receipt tax reimbursement), and all other non-recurring fees. Energy charge or Minimum Usage Fee is not prorated for short or nonstandard billing cycles.'),
-    electricity_price_text_sp: new FormControl("Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar."),
+    electricity_price_text_sp: new FormControl("Los cargos de energía se incluyen e incluyen todas las tarifas de entrega recurrentes impuestas por su TDU regulada local. Esta divulgación de precio fijo no incluye los impuestos federales, estatales y locales aplicables ni ninguna tarifa (incluido el reembolso del impuesto de recibo bruto) y todas las demás tarifas no recurrentes. El cargo de energía, la tarifa base o la tarifa de uso mínimo no se prorratean para ciclos de facturación cortos o no estándar."),
 
     other_key_term_and_ques_text: new FormControl('See Terms of Service for full listing of fees, deposit policy, and other terms.'),
     other_key_term_and_ques_text_sp: new FormControl('Consulte los Términos del servicio para ver una lista completa de tarifas, política de depósitos y otros términos.'),
@@ -554,18 +554,28 @@ export class AddAdditionalProduct implements OnInit {
           this.productForm.controls.product_name.setValue(element.ProductName)
           this.productForm.controls.PassthruStatus.setValue(element.PassthruStatus)
           this.setElectricityText()
+          this.setElectricityTextSP()
         }
       })
     }
   }
   electricity_price_text_status
+  electricity_price_text_status_sp
   setElectricityText() {
-    console.log('danial')
-    console.log(this.productForm.controls.PassthruStatus.value)
+    // console.log('danial')
+    // console.log(this.productForm.controls.PassthruStatus.value)
     let ON = "Your Average Price Per kWh each month reflects the Base Charge, Energy Charge and all existing recurring charges (including Transmission and Distribution Utility (“TDU”) delivery charges that are passed through to you as billed from TDU). Your average price for electricity will vary according to your actual usage. Energy Charges or Base Charge is not prorated for short or nonstandard billing cycles."
     let OFF = "Energy Charges is bundled and include all recurring delivery fees imposed by your local regulated TDU. This fixed price disclosure does not include applicable federal, state and local taxes or any fees (including gross receipt tax reimbursement), and all other non-recurring fees. Energy charge, Base Fee, or Minimum Usage Fee is not prorated for short or nonstandard billing cycles."
     this.electricity_price_text_status = this.productForm.controls.PassthruStatus.value == true ? ON : OFF
     this.productForm.controls.electricity_price_text.setValue(this.electricity_price_text_status)
+  }
+  setElectricityTextSP() {
+    // console.log('danial2')
+    // console.log(this.productForm.controls.PassthruStatus.value)
+    let ON = "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar."
+    let OFF = "Los cargos de energía se incluyen e incluyen todas las tarifas de entrega recurrentes impuestas por su TDU regulada local. Esta divulgación de precio fijo no incluye los impuestos federales, estatales y locales aplicables ni ninguna tarifa (incluido el reembolso del impuesto de recibo bruto) y todas las demás tarifas no recurrentes. El cargo de energía, la tarifa base o la tarifa de uso mínimo no se prorratean para ciclos de facturación cortos o no estándar."
+    this.electricity_price_text_status_sp = this.productForm.controls.PassthruStatus.value == true ? ON : OFF
+    this.productForm.controls.electricity_price_text_sp.setValue(this.electricity_price_text_status_sp)
   }
   onSubmit() {
     this.isDisabled = true
@@ -603,7 +613,7 @@ export class AddAdditionalProduct implements OnInit {
       if (this.productForm.controls.electricity_price_text_sp.value != null && this.productForm.controls.electricity_price_text_sp.value != undefined && this.productForm.controls.electricity_price_text_sp.value != '') {
         this.fd.append('electricity_price_text_sp', this.productForm.controls.electricity_price_text_sp.value)
       } else {
-        this.fd.append('electricity_price_text_sp', "Su Precio Promedio por kWh cada mes refleja el Cargo Base, el Cargo por energía y todos los cargos recurrentes existentes (incluidos los cargos de entrega del Servicio de Transmisión y Distribución ('TDU') que se le transfieren a usted según lo facturado por TDU). Su precio promedio de electricidad variará según su uso real. Los Cargos de Energía o Cargo Base no se prorratean para ciclos de facturación cortos o no estándar.")
+        this.fd.append('electricity_price_text_sp', this.electricity_price_text_status_sp)
       }
       if (this.productForm.controls.other_key_term_and_ques_text.value != null && this.productForm.controls.other_key_term_and_ques_text.value != undefined && this.productForm.controls.other_key_term_and_ques_text.value != '') {
         this.fd.append('other_key_term_and_ques_text', this.productForm.controls.other_key_term_and_ques_text.value)

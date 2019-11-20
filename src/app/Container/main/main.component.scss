@@ -3934,12 +3934,19 @@ h3 {
   color: #959fac;
   display: block;
 }
-
+.links-list{
+  line-height: 30px;
+}
+.links-list b{
+  color: #959fac;
+  font-weight: 400;
+}
 .links-list a {
-  margin: 0 10px;
-  font-size: 18px;
+  margin: 0 5px;
+  font-size: 14px;
   color: #959fac;
   text-decoration: underline;
+  font-weight: 700;
 }
 
 .residential-main .heading {
@@ -3967,8 +3974,16 @@ h3 {
   background: #fff;
   margin-bottom: 20px;
   box-shadow: 0px 0px 12px #ccc;
+  position: relative;
 }
-
+.box-id{
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  margin: 0;
+  font-size: 8px;
+  font-style: italic;
+}
 .price-box h3 {
   margin: 0px !important;
   color: #ff4270;
