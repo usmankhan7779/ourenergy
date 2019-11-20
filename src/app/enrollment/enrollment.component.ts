@@ -470,14 +470,48 @@ export class EnrollmentComponent implements OnInit {
       obj['pm_zip'] = this.premiseInfo['zip']
       obj['pm_county'] = this.premiseInfo['countyname']
       obj['waiver_notice'] = 'Y'
-      if (this.setAutoPay == true) {
-        obj['deposit_pay_type'] = "C"
-        obj['deposit_acct_type'] = "ccard"
-      }
-      else if (this.setAutoPayACH == true) {
+    if (this.setAutoPayACH == true) {
+        obj['deposit_card_type'] = ''
+        obj['deposit_cc_no']=''
+        obj['deposit_security_code']= ''
+        obj['deposit_expiry_MM']= ''
+        obj['deposit_expiry_YYYY']= ''
         obj['save_acct_ref_on_file'] = this.fourFormGroup.controls.save_acct_ref_on_file.setValue('1');
         obj['deposit_pay_type'] = "6"
         obj['deposit_acct_type'] = this.fourFormGroup.controls.deposit_acct_type.value
+        obj['deposit_account_no'] = this.fourFormGroup.controls.deposit_account_no.value
+        obj['deposit_aba_nbr']=this.fourFormGroup.controls.deposit_aba_nbr.value
+        obj['confirm_routing']= this.fourFormGroup.controls.confirm_routing.value
+        obj['confirm_account']= this.fourFormGroup.controls.confirm_account.value
+      }
+      else if( this.setAutoPay == true && this.viewpaybutton == false){
+        obj['deposit_pay_type'] = "C"
+        obj['deposit_acct_type'] = "ccard"
+        obj['deposit_card_type'] =''
+        obj['deposit_cc_no']=''
+        obj['deposit_security_code']= ''
+        obj['deposit_expiry_MM']= ''
+        obj['deposit_expiry_YYYY']= ''
+
+        obj['deposit_account_no'] = ''
+        obj['deposit_aba_nbr']=''
+        obj['confirm_routing']= ''
+        obj['confirm_account']= ''
+        obj['save_acct_ref_on_file'] = '0'
+      }
+        else if (this.setAutoPay == true) {
+        obj['deposit_pay_type'] = "C"
+        obj['deposit_acct_type'] = "ccard"
+        obj['deposit_card_type'] = this.fourFormGroup.controls.deposit_card_type.value
+        obj['deposit_cc_no']=this.fourFormGroup.controls.deposit_cc_no.value
+        obj['deposit_security_code']= this.fourFormGroup.controls.deposit_security_code.value
+        obj['deposit_expiry_MM']= this.fourFormGroup.controls.deposit_expiry_MM.value
+        obj['deposit_expiry_YYYY']= this.fourFormGroup.controls.deposit_expiry_YYYY.value
+
+        obj['deposit_account_no'] = ''
+        obj['deposit_aba_nbr']=''
+        obj['confirm_routing']= ''
+        obj['confirm_account']= ''
       }
       const dialogRef = this.dialog.open(EnrollmentConsentDialog, {
         width: '750px',

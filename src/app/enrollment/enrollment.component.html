@@ -514,15 +514,9 @@
                             fourFormGroup.controls.deposit_expiry_YYYY.value==''">Next</button>
                             <button  matStepperNext id="next6" (click)="goToTop()" *ngIf="viewpaybutton == true && Check=='ACH'"  [disabled]="fourFormGroup.controls.deposit_acct_type.value==''||
                             fourFormGroup.controls.deposit_account_no.value==''|| fourFormGroup.controls.deposit_aba_nbr.value==''|| fourFormGroup.controls.confirm_routing.value==''||
-                            fourFormGroup.controls.confirm_account.value==''">Next</button>
+                            fourFormGroup.controls.confirm_account.value=='' || fourFormGroup.controls.deposit_aba_nbr.value != fourFormGroup.controls.confirm_routing.value || 
+                            fourFormGroup.controls.deposit_account_no.value != fourFormGroup.controls.confirm_account.value">Next</button>
                         </div>
-                        <!-- <div  class="stepperbutton"  *ngIf="Check=='ACH'">
-                                <button  matStepperPrevious (click)="goToTop()">Back</button>
-                            <button  matStepperNext id="next6" (click)="goToTop()"  [disabled]="fourFormGroup.controls.deposit_acct_type.value==''||
-                            fourFormGroup.controls.deposit_account_no.value==''|| fourFormGroup.controls.deposit_aba_nbr.value==''|| fourFormGroup.controls.confirm_routing.value==''||
-                            fourFormGroup.controls.confirm_account.value==''">Next</button>
-
-                        </div> -->
                     </mat-step>
                     <mat-step>
                         <ng-template matStepLabel><b style="padding-right: 15px; padding-left: 15px;">Authorization</b></ng-template>
