@@ -22,8 +22,12 @@ export class AllOffers implements OnInit {
     @ViewChildren(MatPaginator) customerPaginator = new QueryList<MatPaginator>()
     displayedColumns: string[] = ['a', 's', 'n', 'cs', 'dc', 'es', 'ed']
     displayedColumns1: string[] = ['a', 'n', 'cs', 'id', 's', 'dc', 'es']
+    displayedColumns2: string[] = [ 'n', 'cs', 'id','s', 'dc', 'es']
+    displayedColumns3: string[] = ['a' ,'n', 'cd','md']
     offerDataSource = new MatTableDataSource()
     customerDataSource = new MatTableDataSource()
+    renewalDataSource = new MatTableDataSource()
+    downloadHistory =  new MatTableDataSource()
     AllCustomerOfferAssign
     flowStatus = [
         { value: '0', viewValue: 'Reset Contract Renewals' },
@@ -43,6 +47,8 @@ export class AllOffers implements OnInit {
     ngOnInit() {
         this.getOffers()
         this.getCustomers()
+        this.getRenewalData()
+        this.donwloadHistory()
     }
     getCustomers() {
         this.http.get(`${environment.url}renewals/get-all-customer-offer/`).subscribe(res => {
@@ -61,6 +67,42 @@ export class AllOffers implements OnInit {
             }
             else { this.offerStatus = "No Offers Found :(" }
         }, err => { this.offerStatus = "Could not connect to server, please try again." })
+    }
+    renewalStatus
+    renewalDataCsv
+    donloadStatus
+    getRenewalData() {
+        this.http.get(`${environment.url}renewals/get-renewals-data/`).subscribe(res => {
+            this.renewalStatus = null
+            if (res['status'] == true) {
+                this.renewalDataSource.data = res['message']
+            }
+            else { this.renewalStatus = "No Renewal Data Found :(" }
+        }, err => { this.renewalStatus = "Could not connect to server, please try again." })
+    }
+    donwloadCsv(){
+        this.http.get(`${environment.url}renewals/download-csv/`).subscribe(res => {
+            if (res['status'] == true) {
+                this.renewalDataCsv = res['message']
+                window.open(this.renewalDataCsv);
+            }
+            else if (res['status'] == false) {
+                Swal(res['message'], '', 'error').then(th => {
+                })
+            }
+        }, 
+        )
+        this.getRenewalData()
+        this.donwloadHistory()
+    }
+    donwloadHistory(){
+        this.http.get(`${environment.url}renewals/records-for-renewals-csv/`).subscribe(res => {
+            this.donloadStatus = null
+            if (res['status'] == true) {
+                this.downloadHistory = res['message']
+            }
+            else { this.donloadStatus = "No Donwload History Found :(" }
+        }, err => { this.donloadStatus = "Could not connect to server, please try again." })
     }
     filterByFlowStatus(value) {
         if (value != '' && value != null && value != undefined) {
@@ -84,6 +126,11 @@ export class AllOffers implements OnInit {
         filterValue = filterValue.trim()
         filterValue = filterValue.toLowerCase()
         this.customerDataSource.filter = filterValue
+    }
+    applyFilterToRenewal(filterValue: string){
+        filterValue = filterValue.trim()
+        filterValue = filterValue.toLowerCase()
+        this.renewalDataSource.filter = filterValue
     }
     openCreateOfferDialog() {
         let dialogRef = this.dialog.open(CreateOffer, {

@@ -185,12 +185,12 @@ export class OffersComponent implements OnInit {
 
 
 
-  product_tos_url; ourenergy; product_efl_url; offer_id; offer_pk; id;
+  product_tos_url; ourenergy; product_efl_url; offer_id; offer_pk; id;tos_sp; product_efl_url_sp
   //   offer_id: data['offer_id'],
   //   offer_pk: data['offer_pk'],
   //   id: data['id'],
   product_name; tariff_500; tariff_1000; tariff_2000; display_term; display_termination_fee; vendor_company
-  getvalue(val1, val2, val3, val4, val5, val6, val7, val8, val9, val10, val11, val12, val13) {
+  getvalue(val1, val2, val3, val4, val5, val6, val7, val8, val9, val10, val11, val12, val13,val14,val15) {
     //value.product_name,value.tariff_500,value.tariff_1000,value.tariff_2000,
     // value.display_term,value.display_termination_fee,value.vendor_company,value.product_tos_url,https://www.ourenergyllc.com/prodox/yrac.pdf,value.product_efl_url
     this.product_name = val1;
@@ -206,7 +206,9 @@ export class OffersComponent implements OnInit {
     this.offer_id = val11;
     this.offer_pk = val12;
     this.id = val13;
-    console.log(val1, val2, val3, val4, val5, val6, val7, val8, val9, val10)
+    this.tos_sp = val14
+    this.product_efl_url_sp = val15
+    console.log(val1, val2, val3, val4, val5, val6, val7, val8, val9, val10, val15)
 
 
   }

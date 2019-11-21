@@ -86,13 +86,13 @@ export class EnrollmentComponent implements OnInit {
   }
   reset() {
     this.showCheckbox = false
-    console.log("check")
+    // console.log("check")
   }
 
   price_traffic;
   ngOnInit() {
     this.price_traffic = localStorage.getItem('tariff')
-    console.log(this.price_traffic)
+    // console.log(this.price_traffic)
     let currentYear = new Date().getFullYear()
     this.years[0] = currentYear
     for (let index = 1; index < 20; index++) {
@@ -336,9 +336,9 @@ export class EnrollmentComponent implements OnInit {
 
 
     this.setAutoPay = true;
-    console.log(this.setAutoPay)
+    // console.log(this.setAutoPay)
     this.setAutoPayACH = false
-    console.log(this.setAutoPayACH)
+    // console.log(this.setAutoPayACH)
 
   }
 
@@ -375,9 +375,9 @@ export class EnrollmentComponent implements OnInit {
       // this.fourFormGroup.controls.confirm_account.disable()
     }
     this.setAutoPayACH = true
-    console.log(this.setAutoPayACH)
+    // console.log(this.setAutoPayACH)
     this.setAutoPay = false
-    console.log(this.setAutoPay)
+    // console.log(this.setAutoPay)
   }
 
 
@@ -424,7 +424,7 @@ export class EnrollmentComponent implements OnInit {
   loader = false
 
   enroll() {
-    console.log(this.firstFormGroup, this.secondFormGroup, this.thirdFormGroup, this.fourFormGroup)
+    // console.log(this.firstFormGroup, this.secondFormGroup, this.thirdFormGroup, this.fourFormGroup)
     this.submitBtn = true
     if ((this.check1 == true && this.check2 == true && this.check3 == true && this.check4) || (this.check1 == true && this.check2 == true && this.check3 == true)) {
       let second = this.secondFormGroup.value

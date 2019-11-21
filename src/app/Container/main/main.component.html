@@ -80,11 +80,20 @@
             </div>
           </div>
           <div class="text-center inner links-list">
-            <a matTooltip="Terms of Service" [href]="value.product_tos_url" target="_blank"><b>TOS</b></a>
-            <a matTooltip="Your Rights as a Customer" href="https://www.ourenergyllc.com/prodox/yrac.pdf"
-              target="_blank"><b>YRAC</b></a>
-            <a matTooltip="Electric Facts Label" [href]="value.product_efl_url" target="_blank"><b>EFL</b></a>
+              <b>Terms of Service (TOS) </b>
+              <a matTooltip="Terms of Service" [href]=value.product_tos_url target="_blank">
+                  English </a> |
+              <a matTooltip="Terms of Service Spanish" [href]=value.tos_sp target="_blank">
+                  Español </a>
+              <b>Electric Facts Label (EFL)</b>
+              <a matTooltip="Electric Facts Label" [href]=value.product_efl_url target="_blank">
+                  English</a> |
+              <a matTooltip="Electric Facts Label Spanish" [href]=value.product_efl_url_sp
+                  target="_blank">Español</a>
+              <a class="ml-0" href="http://www.ourenergyllc.com/prodox/yrac.pdf" target="_blank">Your Rights As A Customer (YRAC)
+              </a>
             <button class="pink_btn enroll-btn"  (click)="enroll(i,value.id,value.product_id,value.rate,value.batch_rate,value.term)">Enroll Now</button>
+            <p class="box-id">{{value.product_id}}</p>
           </div>
         </div>
         <!-- [disabled]="selectProductBtnDisabled[i]" -->

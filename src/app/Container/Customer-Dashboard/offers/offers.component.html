@@ -80,7 +80,7 @@
 
                                         <button class="pink_btn enroll-btn" data-toggle="modal" data-target="#myModal"
                                             (click)="getvalue(value.product_name,value.tariff_500,value.tariff_1000,value.tariff_2000,
-                                    value.display_term,value.display_termination_fee,value.vendor_company,value.product_tos_url,'https://www.ourenergyllc.com/prodox/yrac.pdf',value.product_efl_url,value.offer_id,value.offer_pk,value.id)">
+                                    value.display_term,value.display_termination_fee,value.vendor_company,value.product_tos_url,'https://www.ourenergyllc.com/prodox/yrac.pdf',value.product_efl_url,value.offer_id,value.offer_pk,value.id, value.tos_sp,value.product_efl_url_sp )">
                                             <!-- (click)="RenewNow(value)" -->
 
 
@@ -88,6 +88,7 @@
                                         <!-- static expiry date start-->
                                         <p class="s_expiryDate">Deal Expires on:<b> {{date.expiry_date}}</b></p>
                                         <!-- static expiry date end -->
+                                        <p class="box-id">{{value.product_id}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +169,7 @@
                 <h2 class="modal-title text-center">Renew Details</h2>
             </div>
             <div class="modal-body">
-                <div class="outer_info">
+                <div class="">
                     <div class="offer_pop_div1">
                         <ul class="heading">
                             <li>
@@ -190,7 +191,7 @@
                                 <p>Vendor Company </p>
                             </li>
                         </ul>
-                        <ul>
+                        <ul class="heading">
                             <li>
                                 <p>{{product_name}}</p>
                             </li>
@@ -209,10 +210,12 @@
                             <li>
                                 <p>{{vendor_company}}</p>
                             </li>
-                            <li>
-                                <ul class="tos_pop">
+                            
+                               
+                                <!-- <ul class="tos_pop">
                                     <li>
-                                        <a href="{{product_tos_url}}" target="_blank">TOS</a>
+                                        <b>Terms of Service (TOS) </b>
+                                        <a matTooltip="Terms of Service" href="{{product_tos_url}}" target="_blank">English</a>
                                     </li>
                                     <li>
                                         <a href="https://www.ourenergyllc.com/prodox/yrac.pdf" target="_blank">YRAC</a>
@@ -220,13 +223,33 @@
                                     <li>
                                         <a href="{{product_efl_url}}" target="_blank">EFL</a>
                                     </li>
-                                </ul>
-                            </li>
+                                </ul> -->
                             <!-- <li><p>{{product_tos_url}}</p></li>
             <li> <p>{{ourenergy}}</p></li>
             <li><p>{{product_efl_url}}</p></li> -->
                         </ul>
+                        <div class="TOS_EFL">
+                                <b>Terms of Service (TOS) </b>
+                                      <a matTooltip="Terms of Service" [href]=product_tos_url target="_blank">
+                                          English </a> |
+                                      <a matTooltip="Terms of Service Spanish" [href]=tos_sp target="_blank">
+                                          Español </a>
+                                          <br>
+                                      <b>Electric Facts Label (EFL)</b>
+                                      <a matTooltip="Electric Facts Label" [href]=product_efl_url
+                                          target="_blank">
+                                          English</a> |
+                                      <a matTooltip="Electric Facts Label Spanish" [href]=product_efl_url_sp
+                                          target="_blank">Español</a>
+                                          <br>
+                                      <b>
+                                            <a class="ml-0" href="http://www.ourenergyllc.com/prodox/yrac.pdf"
+                                            target="_blank">Your Rights As A Customer (YRAC)
+                                        </a>
+                                      </b>
+                                  </div>
                     </div>
+                   
                     <!--  -->
                     <div class="offer_pop_div1">
                         <ul class="heading">
@@ -317,7 +340,7 @@
       </label> -->
             </div>
             <div class=" text-center">
-                <button type="button" *ngIf="buttonVisible==true" (click)="RenewNow(value)">Renew Now </button>
+                <button type="button" *ngIf="buttonVisible==true" (click)="RenewNow(value)" data-dismiss="modal">Renew Now </button>
                 <button type="button" data-dismiss="modal">NO </button>
             </div>
         </div>

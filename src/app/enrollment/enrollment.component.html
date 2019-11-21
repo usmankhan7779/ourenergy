@@ -424,7 +424,7 @@
                             <mat-card class="form mat-elevation-z4">
                                 <mat-card-title class="mat-elevation-z4"> Automatic Bill Pay </mat-card-title>
                                 <div class="w-100 d-flex">
-                                    <mat-checkbox (change)="viewpay($event.checked)" [(ngModel)]="autopay"> Sign-up for
+                                    <mat-checkbox (change)="viewpay($event.checked)" [(ngModel)]="autopay" [ngModelOptions]="{standalone: true}"> Sign-up for
                                         Auto Bill Pay </mat-checkbox>
 
                                     <!-- (change)="changePayMode($event)"  -->
